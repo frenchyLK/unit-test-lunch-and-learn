@@ -4,13 +4,9 @@ import { GameInfo, Board, Player, Enemy, DebugState } from '../components';
 import { UP, DOWN, LEFT, RIGHT } from '../helpers/constants';
 import { pluck } from '../helpers/utils';
 
-/*
-    Since my api key is not publicly available,
-    cloned versions will lack the ability to post
-    new high scores.
-*/
-// import url from 'api';
+const url = 'example.com';
 
+//Note that this function is not testable, because nothing external to this file can access it.
 const getDefaultState = ({ boardSize, playerSize, highScore = 0 }) => {
     const half = Math.floor(boardSize / 2) * playerSize;
     return {
@@ -257,27 +253,28 @@ export default class Game extends Component {
     }
 
     fetchGlobalHighScore = () => {
-        // axios.get(url)
-        //     .then(data => {
-        //         this.setState({
-        //             globalHighScore: data.data.fields.global_high_score
-        //         })
-        //     })
-        //     .catch(err => console.warn(err))
+         //Returning the result of the promsie makes it more testable
+         return axios.get(url)
+             .then(data => {
+                 this.setState({
+                     globalHighScore: data.data.fields.global_high_score
+                 })
+             })
+             .catch(err => console.warn(err))
     }
 
     updateGlobalHighScore = (highScore) => {
-        // axios.patch(url, {
-        //     "fields": {
-        //         "global_high_score": highScore
-        //     }
-        // })
-        // .then(data => {
-        //     this.setState({
-        //         globalHighScore: data.data.fields.global_high_score
-        //     });
-        // })
-        // .catch(err => console.warn(err))
+         return axios.patch(url, {
+             "fields": {
+                 "global_high_score": highScore
+             }
+         })
+         .then(data => {
+             this.setState({
+                 globalHighScore: data.data.fields.global_high_score
+             });
+         })
+         .catch(err => console.warn(err))
     }
 
     style = () => {

@@ -1,4 +1,5 @@
 const merge = require('webpack-merge');
+require('es6-promise').polyfill();
 const TARGET = process.env.npm_lifecycle_event;
 process.env.BABEL_ENV = TARGET;
 
