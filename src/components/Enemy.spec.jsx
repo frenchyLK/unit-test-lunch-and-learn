@@ -24,7 +24,7 @@ describe('Enemy component', () => {
       expect(onCollide.called).to.be.true;
     });
 
-    //Example: verifying that a function was called
+    //Example: verifying that a stubbed function was called
     it('should call onCollide if the player item overlaps the enemy position', () => {
       const onCollide = sinon.stub();
 
@@ -40,7 +40,7 @@ describe('Enemy component', () => {
       expect(onCollide.called).to.be.true;
     });
 
-    //Example: verifying that a function was not called
+    //Example: verifying that a stubbed function was not called
     it('should not call onCollide if the player item does not overlap the enemy position', () => {
       const onCollide = sinon.stub();
 

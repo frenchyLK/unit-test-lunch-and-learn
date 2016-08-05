@@ -10,9 +10,10 @@ chai.use(chaiEnzyme());
 
 describe('Game container', () => {
   describe('incrementActiveEnemies', () => {
-      //Example: using a spy to verify that a function was called with correct parameters
+      //Example: using a spy to verify that a function was called
+      // with correct parameters
       it ('should call setState with an activeEnemies value incremented by 1', () => {
-        const result = shallow(<Game></Game>);
+        const result = shallow(<Game playerSize={2}></Game>);
 
         const component = result.instance();
         result.setState({
@@ -30,7 +31,7 @@ describe('Game container', () => {
   describe('resetGame', () => {
     //Example: stubbing an existing function by name
     it('should call updateGlobalHighScore if the player\'s score is higher than the current globalHighScore', () => {
-      const result = shallow(<Game></Game>);
+      const result = shallow(<Game playerSize={2}></Game>);
 
       const component = result.instance();
       result.setState({
@@ -45,17 +46,19 @@ describe('Game container', () => {
   });
 
   describe('fetchGlobalHighScore', () => {
-    //Example: stubbing a third party library function, which also returns a promsie
+    //Example: stubbing a third party library function,
+    //which also returns a promsie
     it ('should call axios.get', () => {
       sinon.stub(axios, 'get').returns(Promise.resolve());
 
-      const result = shallow(<Game></Game>);
+      const result = shallow(<Game playerSize={2}></Game>);
 
       const component = result.instance();
       component.fetchGlobalHighScore();
       expect(axios.get.called).to.be.true;
 
-      //Restore the function on the imported library so it doesn't interfere with later tests
+      //Restore the function on the imported library so it
+      //doesn't interfere with later tests
       axios.get.restore();
     });
 
@@ -70,7 +73,7 @@ describe('Game container', () => {
         }
       }));
 
-      const result = shallow(<Game></Game>);
+      const result = shallow(<Game playerSize={2}></Game>);
       result.setState({
         globalHighScore: 100
       });
